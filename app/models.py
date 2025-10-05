@@ -10,7 +10,7 @@ class ScreenshotRequest(BaseModel):
 
     url: HttpUrl = Field(..., description="URL of the page to screenshot")
     width: int = Field(1920, ge=800, le=3840, description="Screenshot width in pixels")
-    height: int = Field(1080, ge=600, le=2160, description="Screenshot height in pixels")
+    height: int = Field(1080, ge=600, le=3840, description="Screenshot height in pixels (supports 4K portrait)")
     wait_time: int = Field(
         10000, ge=0, le=60000, description="Time to wait after page load (milliseconds)"
     )
