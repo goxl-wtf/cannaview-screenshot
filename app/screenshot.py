@@ -97,7 +97,7 @@ class ScreenshotService:
             product_count = 0
             if wait_for_selector:
                 product_count = await page.evaluate(
-                    f'document.querySelectorAll("{wait_for_selector}").length'
+                    f'() => document.querySelectorAll("{wait_for_selector}").length'
                 )
                 logger.info(f"📊 Found {product_count} elements matching selector")
 
