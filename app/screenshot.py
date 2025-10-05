@@ -96,8 +96,12 @@ class ScreenshotService:
             # Count products if selector was provided
             product_count = 0
             if wait_for_selector:
+                # Use proper JavaScript function to avoid quote escaping issues
                 product_count = await page.evaluate(
-                    f'() => document.querySelectorAll("{wait_for_selector}").length'
+                    """
+                    (selector) => document.querySelectorAll(selector).length
+                    """,
+                    wait_for_selector
                 )
                 logger.info(f"📊 Found {product_count} elements matching selector")
 
