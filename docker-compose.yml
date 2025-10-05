@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  screenshot-service:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - API_KEY=${API_KEY:-dev-api-key-change-in-production}
+      - ALLOWED_DOMAINS=${ALLOWED_DOMAINS:-easydis.io,www.easydis.io,localhost}
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./app:/app/app  # Mount app directory for development
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s

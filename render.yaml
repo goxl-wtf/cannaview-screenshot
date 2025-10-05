@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: cannaview-screenshot
+    runtime: docker
+    plan: starter  # $7/month for always-on service
+    healthCheckPath: /health
+    envVars:
+      - key: API_KEY
+        sync: false  # Set manually in Render dashboard
+      - key: ALLOWED_DOMAINS
+        value: easydis.io,www.easydis.io
+      - key: LOG_LEVEL
+        value: INFO
+      - key: BROWSER_TYPE
+        value: chromium
+      - key: HEADLESS
+        value: "true"
